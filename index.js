@@ -27,3 +27,47 @@ function createGallery(gallery) {
     }).join('');
 }
 
+
+// Открытие модалки по клику
+
+
+ref.jsGallery.addEventListener('click', openJsLightbox); // Открытие модалки по клику
+
+function openJsLightbox(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== 'IMG') {
+        return
+    }
+
+    const largeImg = e.target.dataset.source;
+    const imgAlt = e.target.alt;
+    const index = e.target.dataset.index;
+
+    ref.jsLightbox.classList.add("is-open");
+    ref.lightboxImage.src = largeImg;
+    ref.lightboxImage.alt = imgAlt;
+    ref.lightboxImage.dataset.index = index;
+}
+
+
+// Закрытие модалки по иконке
+// Закрытие модалки по пустоте
+// Закрытие модалки по ESC
+
+
+ref.lightboxButton.addEventListener('click', closeJsLightbox); // Закрытие модалки по иконке
+ref.lightboxOverlay.addEventListener('click', closeJsLightbox); // Закрытие модалки по пустоте
+
+function closeJsLightbox() {
+    ref.jsLightbox.classList.remove("is-open");
+    ref.lightboxImage.src = '';
+    ref.lightboxImage.alt = '';
+}
+
+document.addEventListener('keydown', closeJsLightboxByEsc); // Закрытие модалки по ESC
+
+function closeJsLightboxByEsc(e) {
+    if (e.code === "Escape") {
+        closeJsLightbox();
+    }
+}
