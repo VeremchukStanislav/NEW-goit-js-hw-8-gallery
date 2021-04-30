@@ -71,3 +71,27 @@ function closeJsLightboxByEsc(e) {
         closeJsLightbox();
     }
 }
+
+
+// Листание картинок
+
+
+document.addEventListener('keydown', (e) => scrollGallery(e, galleryItems));
+
+function scrollGallery(e, gallery) {
+    let index = parseInt(ref.lightboxImage.dataset.index);
+
+    if (e.code === "ArrowLeft" && index > 0) {
+        index -= 1;
+        ref.lightboxImage.dataset.index = index;
+        ref.lightboxImage.src = gallery[index].original;
+        ref.lightboxImage.alt = gallery[index].description;
+    }
+
+    if (e.code === "ArrowRight" && index < gallery.length - 1) {
+        index += 1;
+        ref.lightboxImage.dataset.index = index;
+        ref.lightboxImage.src = gallery[index].original;
+        ref.lightboxImage.alt = gallery[index].description;
+    }
+}
